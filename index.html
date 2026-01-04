@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gestion Don de Sang</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Gestion Don de Sang</h1>
+    <nav>
+      <button data-target="login">Connexion</button>
+      <button data-target="register">Inscription</button>
+      <button data-target="dashboard" id="nav-dashboard">Tableau de bord</button>
+      <button data-target="clients">Clients</button>
+      <button data-target="donors">Donateurs</button>
+      <button data-target="docs">Documentation</button>
+      <button id="logoutBtn" class="hidden">Se déconnecter</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="login" class="page">
+      <h2>Connexion</h2>
+      <form id="loginForm">
+        <label>Nom d'utilisateur<input type="text" id="loginUsername" required></label>
+        <label>Mot de passe<input type="password" id="loginPassword" required></label>
+        <button type="submit">Se connecter</button>
+      </form>
+      <p>Ou <a href="#" id="visitorLink">Se connecter comme visiteur simple</a> (documentation)</p>
+    </section>
+
+    <section id="register" class="page hidden">
+      <h2>Inscription</h2>
+      <form id="registerForm">
+        <label>Prénom et nom<input type="text" id="name" required></label>
+        <label>Lieu de résidence<input type="text" id="location" required></label>
+        <label>Âge<input type="number" id="age" min="18" max="40" required></label>
+        <label>Groupe sanguin
+          <select id="bloodGroup" required>
+            <option value="">--Choisir--</option>
+            <option>A+</option>
+            <option>A-</option>
+            <option>B+</option>
+            <option>B-</option>
+            <option>AB+</option>
+            <option>AB-</option>
+            <option>O+</option>
+            <option>O-</option>
+          </select>
+        </label>
+        <label>Nom d'utilisateur<input type="text" id="regUsername" required></label>
+        <label>Mot de passe<input type="password" id="regPassword" required></label>
+        <button type="submit">S'inscrire</button>
+      </form>
+    </section>
+
+    <section id="dashboard" class="page hidden">
+      <h2>Tableau de bord</h2>
+      <div id="userInfo" class="card"></div>
+      <div class="cards">
+        <div class="card small" id="cardClients">
+          <h3>Clients</h3>
+          <p>Gérer les demandes de sang</p>
+          <button data-target="clients">Voir les clients</button>
+        </div>
+        <div class="card small" id="cardDonors">
+          <h3>Donateurs</h3>
+          <p>Voir les donneurs disponibles</p>
+          <button data-target="donors">Voir les donneurs</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Actions</h3>
+        <div id="addActions">
+          <button id="beClientBtn">S'ajouter comme client</button>
+          <button id="beDonorBtn">S'ajouter comme donateur</button>
+        </div>
+
+        <form id="addClientForm" class="hidden" style="margin-top:12px">
+          <label>Raison / Besoin <input type="text" id="clientNeed" required></label>
+          <label>Groupe sanguin
+            <select id="clientBlood" required>
+              <option value="">--Choisir--</option>
+              <option>A+</option>
+              <option>A-</option>
+              <option>B+</option>
+              <option>B-</option>
+              <option>AB+</option>
+              <option>AB-</option>
+              <option>O+</option>
+              <option>O-</option>
+            </select>
+          </label>
+          <label>Ville<input type="text" id="clientCity" placeholder="Ex: Paris"></label>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button type="submit">Ajouter comme client</button>
+            <button type="button" id="cancelClient">Annuler</button>
+          </div>
+        </form>
+
+        <form id="addDonorForm" class="hidden" style="margin-top:12px">
+          <p>Les informations seront préremplies depuis votre profil.</p>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button type="submit">Ajouter comme donateur</button>
+            <button type="button" id="cancelDonor">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="clients" class="page hidden">
+      <h2>Clients</h2>
+      <div id="clientsList" class="list"></div>
+    </section>
+
+    <section id="donors" class="page hidden">
+      <h2>Donateurs</h2>
+      <div id="donorsList" class="list"></div>
+    </section>
+
+    <section id="docs" class="page hidden">
+      <h2>Documentation</h2>
+      <article>
+        <h3>À propos de l'application</h3>
+        <p>Cette application demo permet de gérer les demandes de sang et les donneurs. Elle fonctionne entièrement en local (localStorage).</p>
+
+        <h3>Pourquoi donner son sang ?</h3>
+        <p>Donner son sang sauve des vies : les produits sanguins sont essentiels pour les opérations chirurgicales, les traitements contre le cancer, les accidents et les pathologies chroniques. Un seul don peut aider plusieurs personnes. Le don renforce aussi la solidarité locale et la résilience des systèmes de santé.</p>
+
+        <h3>Ce qu'il faut savoir avant de donner</h3>
+        <ul>
+          <li><strong>Conditions d'éligibilité :</strong> âge, poids et état de santé sont contrôlés pour garantir la sécurité du donneur et du receveur. Cette application vérifie l'âge (entre 18 et 40 ans) lors de l'inscription.</li>
+          <li><strong>Sécurité :</strong> les prélèvements sont réalisés avec du matériel stérile à usage unique et encadrés par du personnel formé.</li>
+          <li><strong>Compatibilité :</strong> connaître son groupe sanguin aide à orienter les dons vers les personnes qui en ont besoin rapidement.</li>
+        </ul>
+
+        <h3>Engagement et bonnes pratiques</h3>
+        <p>Si vous êtes en bonne santé, envisagez de donner régulièrement lorsque c'est possible. Informez-vous sur les contre-indications temporaires (voyages, médicaments) et suivez les recommandations locales. Encouragez amis et famille à donner pour créer un réseau d'entraide durable.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <small>Application de gestion de don de sang — Demo locale</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
